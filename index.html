@@ -2,6 +2,29 @@
 <html lang="en">
 
 <head>
+    <!-- 
+    =============================================================================
+    TUMELO SUPING - RESPONSIVE PORTFOLIO WEBSITE
+    =============================================================================
+    
+    A modern, fully responsive portfolio website built with HTML5, CSS3, and 
+    vanilla JavaScript. Features include:
+    
+    - Responsive design (mobile-first approach)
+    - Real-time RGB color customization system
+    - Smooth scroll-triggered animations
+    - Interactive project and skills sections
+    - Contact form with validation
+    - Accessibility features and keyboard navigation
+    - Professional styling with modern aesthetics
+    
+    Author: Tumelo Suping
+    Version: 1.0
+    Last Updated: 2024
+    =============================================================================
+    -->
+
+    <!-- Basic HTML5 meta tags for proper rendering and SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
@@ -10,80 +33,187 @@
     <meta name="author" content="Tumelo Suping">
     <title>Tumelo Suping - Frontend Developer Portfolio</title>
 
-    <!-- Google Fonts -->
+    <!-- External font import for modern typography -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <style>
-        /* CSS Reset and Base Styles */
+        /* 
+        =============================================================================
+        CSS STYLES - RESPONSIVE PORTFOLIO WEBSITE
+        =============================================================================
+        
+        This stylesheet contains all the styling for the portfolio website, organized
+        into logical sections for maintainability:
+        
+        1. CSS Reset and Base Styles
+        2. CSS Custom Properties (Variables)
+        3. Layout System (Container, Grid, Flexbox)
+        4. Navigation Styles
+        5. Section-specific Styles (Home, About, Projects, Skills, Contact)
+        6. Interactive Components (Color Panel, Back-to-Top, Forms)
+        7. Animation Definitions
+        8. Responsive Breakpoints
+        9. Accessibility Features
+        
+        =============================================================================
+        */
+
+        /* 
+        CSS RESET AND BASE STYLES
+        -------------------------
+        Reset default browser styles and establish consistent baseline
+        */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* Ensures padding/border included in element width */
         }
 
+        /* 
+        CSS CUSTOM PROPERTIES (VARIABLES)
+        ---------------------------------
+        Centralized color and spacing system for easy theming and maintenance.
+        These variables are dynamically updated by the JavaScript color system.
+        */
         :root {
+            /* Primary color scheme - dynamically updated by color panel */
             --primary-bg: rgb(128, 128, 128);
+            /* Main background color */
             --primary-text: rgb(255, 255, 255);
+            /* Main text color */
             --accent-color: #007bff;
+            /* Accent/highlight color */
+
+            /* Animation timing variables */
             --transition-speed: 0.3s;
+            /* Standard transition duration */
+            --color-transition-speed: 0.6s;
+            /* Color change transition duration */
+
+            /* Layout spacing variables */
             --container-padding: 20px;
+            /* Default container padding */
             --section-padding: 60px 0;
+            /* Default section padding */
         }
 
+        /* 
+        HTML AND BODY BASE STYLES
+        -------------------------
+        Establish smooth scrolling and typography foundation
+        */
         html {
             scroll-behavior: smooth;
+            /* Enable smooth scrolling for anchor links */
         }
 
         body {
+            /* Typography settings */
             font-family: 'Poppins', sans-serif;
+            /* Modern, readable font */
             line-height: 1.6;
+            /* Optimal line spacing for readability */
+            font-weight: 400;
+            /* Normal font weight */
+            letter-spacing: -0.01em;
+            /* Slight letter tightening for modern look */
+
+            /* Background with layered gradients for visual depth */
             background:
                 linear-gradient(135deg, var(--primary-bg), rgba(128, 128, 128, 0.8)),
                 radial-gradient(circle at 50% 50%, rgba(0, 123, 255, 0.02) 0%, transparent 70%);
+
+            /* Text color with smooth transitions */
             color: var(--primary-text);
-            transition: all var(--transition-speed) ease;
+
+            /* Smooth color transitions when theme changes */
+            transition:
+                background var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* Layout properties */
             min-height: 100vh;
-            font-weight: 400;
-            letter-spacing: -0.01em;
+            /* Ensure full viewport height */
+
+            /* Font rendering optimizations */
             text-rendering: optimizeLegibility;
+            /* Improve text rendering quality */
             -webkit-font-smoothing: antialiased;
+            /* Smooth fonts on WebKit browsers */
             -moz-osx-font-smoothing: grayscale;
+            /* Smooth fonts on Firefox/macOS */
         }
 
-        /* Container System - Mobile First */
+        /* 
+        LAYOUT SYSTEM - MOBILE FIRST APPROACH
+        -------------------------------------
+        Responsive container and section system that adapts to all screen sizes
+        */
+
+        /* Main content container with responsive max-width */
         .container {
             max-width: 1200px;
+            /* Maximum width for large screens */
             margin: 0 auto;
+            /* Center container horizontally */
             padding: 0 var(--container-padding);
+            /* Responsive horizontal padding */
             width: 100%;
+            /* Full width within max-width constraint */
         }
 
-        /* Section Base Styles */
+        /* Base section styling for consistent layout */
         .section {
             padding: var(--section-padding);
+            /* Responsive vertical padding */
             min-height: 100vh;
+            /* Full viewport height sections */
             display: flex;
+            /* Flexbox for easy centering */
             align-items: center;
+            /* Vertical centering */
             justify-content: center;
+            /* Horizontal centering */
         }
 
-        /* Navigation Styles */
+        /* 
+        NAVIGATION STYLES
+        -----------------
+        Fixed navigation bar with glassmorphism effect and smooth transitions
+        */
+
+        /* Main navigation container with fixed positioning */
         .navbar {
             position: fixed;
+            /* Stay at top during scroll */
             top: 0;
             left: 0;
             right: 0;
+
+            /* Glassmorphism background effect */
             background:
                 linear-gradient(145deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.9) 100%);
             backdrop-filter: blur(20px);
+            /* Blur background content */
+
+            /* Layering and spacing */
             z-index: 1000;
+            /* Ensure navbar stays on top */
             padding: 1rem 0;
+            /* Vertical padding */
+
+            /* Smooth transitions for scroll effects */
             transition: all var(--transition-speed) ease;
+
+            /* Visual enhancements */
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow:
                 0 4px 20px rgba(0, 0, 0, 0.2),
+                /* Main shadow */
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            /* Inner highlight */
         }
 
         .navbar.scrolled {
@@ -1160,6 +1290,230 @@
             position: relative;
         }
 
+        /* Professional Links Styles */
+        .professional-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .professional-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 16px;
+            color: var(--primary-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .professional-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .professional-link:hover::before,
+        .professional-link:focus::before {
+            left: 100%;
+        }
+
+        .professional-link:hover,
+        .professional-link:focus {
+            transform: translateY(-5px) scale(1.05);
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.12) 100%);
+            border-color: var(--accent-color);
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.2),
+                0 8px 20px rgba(0, 123, 255, 0.15);
+            color: var(--accent-color);
+            outline: 2px solid rgba(0, 123, 255, 0.3);
+            outline-offset: 2px;
+        }
+
+        .professional-link:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .professional-link-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .professional-link:hover .professional-link-icon,
+        .professional-link:focus .professional-link-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .professional-link-text {
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Hero Professional Links */
+        .hero-professional-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-professional-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, var(--accent-color), #0056b3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 8px 25px rgba(0, 123, 255, 0.4),
+                0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-professional-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .hero-professional-link:hover::before,
+        .hero-professional-link:focus::before {
+            left: 100%;
+        }
+
+        .hero-professional-link:hover,
+        .hero-professional-link:focus {
+            transform: translateY(-5px) scale(1.15);
+            background: linear-gradient(45deg, #0056b3, var(--accent-color), #0066cc);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow:
+                0 15px 35px rgba(0, 123, 255, 0.5),
+                0 8px 25px rgba(0, 123, 255, 0.4),
+                0 0 30px rgba(0, 123, 255, 0.3);
+            outline: 3px solid rgba(0, 123, 255, 0.5);
+            outline-offset: 3px;
+        }
+
+        .hero-professional-link:active {
+            transform: translateY(-2px) scale(1.1);
+        }
+
+        /* Contact Info Display */
+        .contact-info {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.08) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(15px);
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-text);
+            font-weight: 600;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            color: var(--primary-text);
+        }
+
+        .contact-info-icon {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+        }
+
+        .contact-info-text {
+            font-weight: 500;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 767px) {
+            .professional-links {
+                gap: 1rem;
+                margin: 1.5rem 0;
+            }
+
+            .professional-link {
+                padding: 0.8rem 1.2rem;
+                font-size: 0.9rem;
+                gap: 0.6rem;
+            }
+
+            .professional-link-icon {
+                font-size: 1.3rem;
+            }
+
+            .hero-professional-links {
+                gap: 1rem;
+                margin-top: 1.5rem;
+            }
+
+            .hero-professional-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .contact-info {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            .contact-info h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+
+            .contact-info-item {
+                font-size: 1rem;
+                gap: 0.8rem;
+            }
+
+            .contact-info-icon {
+                font-size: 1.1rem;
+            }
+        }
+
         #contact::before {
             content: '';
             position: absolute;
@@ -1570,74 +1924,286 @@
             }
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Color Transition Classes */
+        .smooth-color-transition {
+            transition:
+                background var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                background-color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                border-color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        @keyframes heroFadeInUp {
+        .smooth-text-transition {
+            transition: color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .smooth-bg-transition {
+            transition:
+                background var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                background-color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .smooth-border-transition {
+            transition: border-color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Enhanced color transitions for specific elements */
+        .section {
+            transition:
+                background var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-logo,
+        .hero-title,
+        .about-content h2,
+        .projects-content h2,
+        .skills-content h2,
+        .contact-content h2 {
+            transition:
+                color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                -webkit-text-fill-color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-tagline,
+        .about-text p,
+        .projects-subtitle,
+        .skills-subtitle,
+        .contact-content p {
+            transition: color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stat-item,
+        .tech-item,
+        .project-card,
+        .skill-item {
+            transition:
+                background var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                border-color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            transition:
+                background var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                border-color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Gradient transition effects */
+        @keyframes colorFadeIn {
             0% {
                 opacity: 0;
-                transform: translateY(50px) scale(0.9);
+                filter: blur(2px);
             }
 
             50% {
                 opacity: 0.7;
-                transform: translateY(20px) scale(0.95);
+                filter: blur(1px);
             }
 
             100% {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                filter: blur(0);
             }
         }
 
-        /* Scroll-triggered animation classes */
+        .color-transition-active {
+            animation: colorFadeIn var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Color ripple effect animation */
+        @keyframes colorRipple {
+            0% {
+                width: 20px;
+                height: 20px;
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                width: 100px;
+                height: 100px;
+                opacity: 0.4;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+
+            100% {
+                width: 200px;
+                height: 200px;
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(2);
+            }
+        }
+
+        /* Additional elements that need smooth color transitions */
+        .nav-menu a,
+        .stat-number,
+        .stat-label,
+        .tech-name,
+        .tech-description,
+        .skill-name,
+        .skill-description,
+        .skill-percentage,
+        .project-title,
+        .project-description,
+        .tech-tag,
+        .form-group label,
+        .panel-title,
+        .slider-group label {
+            transition: color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+
+        /* Buttons and interactive elements color transitions */
+        .cta-button,
+        .about-btn,
+        .project-btn,
+        .submit-btn,
+        .panel-toggle {
+            transition:
+                background var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        }
+
+        /* Navigation and panel elements color transitions */
+        .navbar,
+        .color-panel {
+            transition:
+                background var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                backdrop-filter var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                border-color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+
+        /* Form elements enhanced color transitions */
+        .form-group input,
+        .form-group textarea {
+            transition:
+                background var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                border-color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                color var(--color-transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        }
+
+        /* 
+        ANIMATION DEFINITIONS
+        --------------------
+        Keyframe animations for smooth, professional transitions throughout the site
+        */
+
+        /* Standard fade-in-up animation for general content */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                /* Fade to full opacity */
+                transform: translateY(0);
+                /* Move to original position */
+            }
+        }
+
+        /* Enhanced hero animation with scaling effect for dramatic entrance */
+        @keyframes heroFadeInUp {
+            0% {
+                opacity: 0;
+                /* Start invisible */
+                transform: translateY(50px) scale(0.9);
+                /* Start below and smaller */
+            }
+
+            50% {
+                opacity: 0.7;
+                /* Partial fade */
+                transform: translateY(20px) scale(0.95);
+                /* Intermediate position */
+            }
+
+            100% {
+                opacity: 1;
+                /* Full opacity */
+                transform: translateY(0) scale(1);
+                /* Final position and size */
+            }
+        }
+
+        /* 
+        SCROLL-TRIGGERED ANIMATION CLASSES
+        ----------------------------------
+        CSS classes that work with JavaScript Intersection Observer
+        to create smooth scroll-triggered animations
+        */
+
+        /* Fade-in animation - elements appear from below */
         .fade-in {
             opacity: 0;
+            /* Start invisible */
             transform: translateY(30px);
+            /* Start 30px below */
             transition: all 0.6s ease-out;
+            /* Smooth transition */
         }
 
         .fade-in.visible {
             opacity: 1;
+            /* Become visible */
             transform: translateY(0);
+            /* Move to original position */
         }
 
+        /* Slide-in from left animation */
         .slide-in-left {
             opacity: 0;
+            /* Start invisible */
             transform: translateX(-50px);
+            /* Start 50px to the left */
             transition: all 0.8s ease-out;
+            /* Slightly longer transition */
         }
 
         .slide-in-left.visible {
             opacity: 1;
+            /* Become visible */
             transform: translateX(0);
+            /* Move to original position */
         }
 
+        /* Slide-in from right animation */
         .slide-in-right {
             opacity: 0;
+            /* Start invisible */
             transform: translateX(50px);
+            /* Start 50px to the right */
             transition: all 0.8s ease-out;
+            /* Slightly longer transition */
         }
 
         .slide-in-right.visible {
             opacity: 1;
+            /* Become visible */
             transform: translateX(0);
+            /* Move to original position */
         }
 
+        /* Scale-in animation - elements grow into view */
         .scale-in {
             opacity: 0;
+            /* Start invisible */
             transform: scale(0.8);
+            /* Start at 80% size */
             transition: all 0.7s ease-out;
+            /* Smooth scaling transition */
         }
 
         .scale-in.visible {
             opacity: 1;
+            /* Become visible */
             transform: scale(1);
+            /* Scale to full size */
         }
 
         .fade-in-delay-1 {
@@ -1652,85 +2218,130 @@
             transition-delay: 0.3s;
         }
 
-        /* Responsive Breakpoints */
+        /* 
+        RESPONSIVE BREAKPOINTS - MOBILE FIRST APPROACH
+        ----------------------------------------------
+        Progressive enhancement from mobile to desktop with optimized
+        layouts and typography scaling for each screen size
+        */
 
-        /* Tablet: 768px and up */
+        /* 
+        TABLET BREAKPOINT: 768px and up
+        ------------------------------
+        Enhanced layout and typography for medium-sized screens
+        */
         @media (min-width: 768px) {
+
+            /* Increase spacing variables for larger screens */
             :root {
                 --container-padding: 40px;
+                /* More horizontal padding */
                 --section-padding: 80px 0;
+                /* More vertical section spacing */
             }
 
+            /* Scale up hero typography for better impact */
             .hero-title {
                 font-size: 4.5rem;
+                /* Larger hero title */
                 margin-bottom: 1.5rem;
             }
 
             .hero-tagline {
                 font-size: 1.4rem;
+                /* Larger tagline text */
                 margin-bottom: 3rem;
             }
 
             .cta-button {
                 padding: 20px 40px;
+                /* Larger button padding */
                 font-size: 1.2rem;
+                /* Larger button text */
             }
 
+            /* Switch about section to two-column layout */
             .about-content {
                 grid-template-columns: 1fr 1fr;
+                /* Two equal columns */
                 text-align: left;
+                /* Left-align text in columns */
                 gap: 4rem;
+                /* Larger gap between columns */
             }
 
+            /* Adjust about section decorative elements */
             .about-tech h3::after {
                 left: 0;
+                /* Left-align underline */
                 transform: none;
+                /* Remove centering transform */
             }
 
+            /* Multi-column layouts for content grids */
             .about-stats {
                 grid-template-columns: repeat(3, 1fr);
+                /* Three-column stats */
             }
 
             .projects-grid {
                 grid-template-columns: repeat(2, 1fr);
+                /* Two-column projects */
                 gap: 3rem;
             }
 
             .skills-grid {
                 grid-template-columns: repeat(2, 1fr);
+                /* Two-column skills */
                 gap: 3rem;
             }
         }
 
-        /* Desktop: 1024px and up */
+        /* 
+        DESKTOP BREAKPOINT: 1024px and up
+        --------------------------------
+        Full desktop experience with maximum typography and spacing
+        */
         @media (min-width: 1024px) {
+
+            /* Maximum spacing for desktop screens */
             :root {
                 --container-padding: 60px;
+                /* Maximum horizontal padding */
                 --section-padding: 100px 0;
+                /* Maximum vertical section spacing */
             }
 
+            /* Maximum hero typography scaling */
             .hero-title {
                 font-size: 5.5rem;
+                /* Maximum hero title size */
                 margin-bottom: 2rem;
             }
 
             .hero-tagline {
                 font-size: 1.5rem;
+                /* Maximum tagline size */
                 margin-bottom: 3.5rem;
             }
 
             .cta-button {
                 padding: 22px 45px;
+                /* Maximum button padding */
                 font-size: 1.3rem;
+                /* Maximum button text size */
             }
 
+            /* Three-column layouts for optimal desktop viewing */
             .projects-grid {
                 grid-template-columns: repeat(3, 1fr);
+                /* Three-column projects */
                 gap: 3rem;
             }
 
             .skills-grid {
                 grid-template-columns: repeat(3, 1fr);
+                /* Three-column skills */
                 gap: 3rem;
             }
         }
@@ -2194,270 +2805,641 @@
             }
         }
 
-        /* Accessibility - Reduced Motion */
+        /* 
+        ACCESSIBILITY - REDUCED MOTION SUPPORT
+        -------------------------------------
+        Respects user's motion preferences for better accessibility.
+        Disables animations for users who prefer reduced motion.
+        */
         @media (prefers-reduced-motion: reduce) {
-            * {
+
+            /* Disable all animations and transitions for accessibility */
+            *,
+            *::before,
+            *::after {
                 animation-duration: 0.01ms !important;
+                /* Minimal animation duration */
                 animation-iteration-count: 1 !important;
+                /* Single iteration only */
                 transition-duration: 0.01ms !important;
+                /* Minimal transition duration */
+                scroll-behavior: auto !important;
+                /* Instant scrolling */
             }
 
+            /* Disable smooth scrolling for reduced motion users */
             html {
-                scroll-behavior: auto;
+                scroll-behavior: auto !important;
+                /* Instant scrolling */
             }
 
+            /* Ensure back-to-top button respects reduced motion */
             .back-to-top {
                 transition-duration: 0.01ms !important;
+                /* Instant state changes */
             }
+
+            /* Disable particle animations */
+            #home::before,
+            #home::after {
+                animation: none !important;
+            }
+
+            /* Disable hover transforms for reduced motion */
+            .project-card:hover,
+            .skill-item:hover,
+            .tech-item:hover,
+            .stat-item:hover {
+                transform: none !important;
+            }
+
+            /* Disable color transition animations */
+            .color-transition-active {
+                animation: none !important;
+            }
+
+            /* Disable shimmer effects */
+            .skill-progress-bar::after {
+                animation: none !important;
+            }
+        }
+
+        /* 
+        ENHANCED ACCESSIBILITY STYLES
+        ----------------------------
+        Additional accessibility improvements for better user experience
+        */
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            :root {
+                --primary-text: #000000;
+                --accent-color: #0000FF;
+            }
+
+            .navbar,
+            .color-panel,
+            .project-card,
+            .skill-item,
+            .stat-item,
+            .tech-item {
+                border: 2px solid #000000 !important;
+            }
+        }
+
+        /* Focus indicators for keyboard navigation */
+        .nav-link:focus,
+        .cta-button:focus,
+        .about-btn:focus,
+        .project-btn:focus,
+        .submit-btn:focus,
+        .reset-btn:focus,
+        .back-to-top:focus,
+        .panel-toggle:focus,
+        .color-slider:focus,
+        .professional-link:focus,
+        .hero-professional-link:focus {
+            outline: 3px solid var(--accent-color) !important;
+            outline-offset: 2px !important;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8) !important;
+        }
+
+        /* Skip to main content link for screen readers */
+        .skip-to-main {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--accent-color);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            z-index: 10000;
+            font-weight: bold;
+            transition: top 0.3s ease;
+        }
+
+        .skip-to-main:focus {
+            top: 6px;
+        }
+
+        /* Screen reader only content */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Ensure sufficient color contrast for text */
+        .hero-tagline,
+        .about-text p,
+        .projects-subtitle,
+        .skills-subtitle,
+        .contact-content p,
+        .project-description,
+        .skill-description,
+        .tech-description {
+            color: var(--primary-text);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Enhanced form accessibility */
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: 3px solid var(--accent-color) !important;
+            outline-offset: 2px !important;
+        }
+
+        /* Error state accessibility */
+        .form-group.invalid input,
+        .form-group.invalid textarea {
+            border-color: #dc3545 !important;
+            background-color: rgba(220, 53, 69, 0.1) !important;
+        }
+
+        /* Success state accessibility */
+        .form-group.valid input,
+        .form-group.valid textarea {
+            border-color: #28a745 !important;
+            background-color: rgba(40, 167, 69, 0.1) !important;
+        }
+
+        /* Keyboard navigation indicators */
+        .nav-menu a:focus-visible,
+        .project-card:focus-visible,
+        .skill-item:focus-visible {
+            outline: 3px solid var(--accent-color) !important;
+            outline-offset: 2px !important;
         }
     </style>
 </head>
 
 <body>
-    <!-- Fixed Navigation -->
-    <nav class="navbar">
+    <!-- 
+    =============================================================================
+    MAIN WEBSITE STRUCTURE
+    =============================================================================
+    
+    The website follows a semantic HTML5 structure with the following sections:
+    1. Skip to Main Content Link - Accessibility navigation
+    2. Fixed Navigation Bar - Always visible navigation with mobile menu
+    3. Color Control Panel - Floating RGB customization interface
+    4. Home Section - Hero area with introduction and CTA
+    5. About Section - Personal information and tech stack
+    6. Projects Section - Portfolio showcase with interactive cards
+    7. Skills Section - Technical skills with progress indicators
+    8. Contact Section - Contact form and professional links
+    9. Back-to-Top Button - Floating scroll-to-top functionality
+    
+    Each section is designed to be fully responsive and accessible.
+    =============================================================================
+    -->
+
+    <!-- Skip to main content link for screen readers and keyboard users -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+    <!-- 
+    FIXED NAVIGATION BAR
+    -------------------
+    Responsive navigation that stays at the top of the page during scroll.
+    Features glassmorphism effect, mobile hamburger menu, and smooth scrolling.
+    Enhanced with ARIA labels and keyboard navigation support.
+    -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <div class="nav-logo">Tumelo Suping</div>
-            <div class="nav-toggle" id="navToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+            <!-- Brand/Logo area -->
+            <div class="nav-logo" role="banner">Tumelo Suping</div>
+
+            <!-- Mobile menu toggle button (hamburger) - only visible on mobile -->
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false"
+                aria-controls="navMenu" type="button">
+                <span aria-hidden="true"></span> <!-- Top line of hamburger -->
+                <span aria-hidden="true"></span> <!-- Middle line of hamburger -->
+                <span aria-hidden="true"></span> <!-- Bottom line of hamburger -->
+                <span class="sr-only">Menu</span>
+            </button>
+
+            <!-- Main navigation menu - responsive for mobile/desktop -->
+            <ul class="nav-menu" id="navMenu" role="menubar" aria-label="Main navigation menu">
+                <li role="none"><a href="#home" class="nav-link" role="menuitem"
+                        aria-label="Go to Home section">Home</a></li>
+                <li role="none"><a href="#about" class="nav-link" role="menuitem"
+                        aria-label="Go to About section">About</a></li>
+                <li role="none"><a href="#projects" class="nav-link" role="menuitem"
+                        aria-label="Go to Projects section">Projects</a></li>
+                <li role="none"><a href="#skills" class="nav-link" role="menuitem"
+                        aria-label="Go to Skills section">Skills</a></li>
+                <li role="none"><a href="#contact" class="nav-link" role="menuitem"
+                        aria-label="Go to Contact section">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Color Control Panel -->
+    <!-- 
+    RGB COLOR CUSTOMIZATION PANEL
+    -----------------------------
+    Floating panel that allows real-time color theme customization.
+    Features RGB sliders, live preview, and smooth color transitions.
+    Positioned on the right side with expand/collapse functionality.
+    -->
     <div class="color-panel" id="colorPanel">
+        <!-- Panel toggle button with accessibility attributes -->
         <div class="panel-toggle" id="panelToggle" tabindex="0" role="button"
             aria-label="Toggle color customization panel" aria-expanded="false">
-            🎨
+            🎨 <!-- Color palette emoji as visual indicator -->
         </div>
+
+        <!-- Panel content area (hidden by default, shown when expanded) -->
         <div class="panel-content" id="panelContent">
             <h3 class="panel-title">Customize Colors</h3>
+
+            <!-- Red color slider with live value display -->
             <div class="slider-group">
                 <label for="r-slider">Red: <span id="r-value">128</span></label>
                 <input type="range" id="r-slider" min="0" max="255" value="128" class="color-slider"
                     aria-label="Red color value">
             </div>
+
+            <!-- Green color slider with live value display -->
             <div class="slider-group">
                 <label for="g-slider">Green: <span id="g-value">128</span></label>
                 <input type="range" id="g-slider" min="0" max="255" value="128" class="color-slider"
                     aria-label="Green color value">
             </div>
+
+            <!-- Blue color slider with live value display -->
             <div class="slider-group">
                 <label for="b-slider">Blue: <span id="b-value">128</span></label>
                 <input type="range" id="b-slider" min="0" max="255" value="128" class="color-slider"
                     aria-label="Blue color value">
             </div>
+
+            <!-- Live color preview showing current RGB combination -->
             <div class="color-preview">
                 <div class="preview-box" id="colorPreview"></div>
                 <span class="preview-text" id="previewText">Preview</span>
             </div>
+
+            <!-- Reset button to return to default color scheme -->
             <button class="reset-btn" id="resetColors">Reset to Default</button>
         </div>
     </div>
 
-    <!-- Home Section -->
-    <section id="home" class="section">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Tumelo Suping</h1>
-                <p class="hero-tagline">Frontend Developer | Creative Technologist | Building digital stories with code
-                </p>
-                <button class="cta-button" onclick="scrollToSection('projects')">View My Work</button>
-            </div>
-        </div>
-    </section>
+    <!-- Main content wrapper for accessibility -->
+    <main id="main-content" role="main" aria-label="Main content">
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text fade-in slide-in-left">
-                    <h2>About Me</h2>
-                    <p>I'm <span class="highlight">Tumelo Suping</span>, a passionate frontend developer with a love for
-                        creating beautiful, functional web experiences. I specialize in modern web technologies and
-                        enjoy bringing creative ideas to life through code.</p>
-                    <p>My journey in web development started with curiosity and has evolved into a dedication to
-                        crafting <span class="highlight">digital stories</span> that engage and inspire users. I believe
-                        in the power of clean code, intuitive design, and seamless user experiences.</p>
-                    <p>As a <span class="highlight">Creative Technologist</span>, I bridge the gap between design and
-                        development, ensuring that every project not only looks great but performs exceptionally across
-                        all devices and platforms.</p>
+        <!-- 
+        HOME/HERO SECTION
+        -----------------
+        Main landing area with animated introduction, call-to-action button,
+        and professional links. Features particle background effects and
+        smooth fade-in animations triggered on page load.
+        Enhanced with semantic markup and accessibility features.
+        -->
+        <section id="home" class="section" role="banner" aria-labelledby="hero-title">
+            <div class="container">
+                <header class="hero-content">
+                    <!-- Main heading with gradient text effect and animation -->
+                    <h1 id="hero-title" class="hero-title">Tumelo Suping</h1>
 
-                    <div class="about-stats fade-in fade-in-delay-1">
-                        <div class="stat-item scale-in">
-                            <span class="stat-number">3+</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                        <div class="stat-item scale-in fade-in-delay-1">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">Projects Completed</span>
-                        </div>
-                        <div class="stat-item scale-in fade-in-delay-2">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Client Satisfaction</span>
-                        </div>
-                    </div>
+                    <!-- Professional tagline describing role and expertise -->
+                    <p class="hero-tagline" role="doc-subtitle">Frontend Developer | Creative Technologist | Building
+                        digital stories with code</p>
 
-                    <div class="about-cta fade-in fade-in-delay-2">
-                        <a href="#contact" class="about-btn" onclick="scrollToSection('contact'); return false;">Let's
-                            Work Together</a>
-                    </div>
-                </div>
-
-                <div class="about-tech fade-in slide-in-right">
-                    <h3>My Tech Stack</h3>
-                    <div class="tech-items">
-                        <div class="tech-item fade-in scale-in" style="--progress-width: 95%;">
-                            <span class="tech-icon">🌐</span>
-                            <div class="tech-name">HTML5</div>
-                            <div class="tech-description">Semantic markup and accessibility best practices</div>
-                            <div class="tech-level">
-                                <div class="tech-progress"></div>
-                            </div>
-                        </div>
-                        <div class="tech-item fade-in scale-in fade-in-delay-1" style="--progress-width: 90%;">
-                            <span class="tech-icon">🎨</span>
-                            <div class="tech-name">CSS3</div>
-                            <div class="tech-description">Advanced layouts, animations, and responsive design</div>
-                            <div class="tech-level">
-                                <div class="tech-progress"></div>
-                            </div>
-                        </div>
-                        <div class="tech-item fade-in scale-in fade-in-delay-2" style="--progress-width: 85%;">
-                            <span class="tech-icon">⚡</span>
-                            <div class="tech-name">JavaScript</div>
-                            <div class="tech-description">ES6+, DOM manipulation, and interactive features</div>
-                            <div class="tech-level">
-                                <div class="tech-progress"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-        <div class="container">
-            <div class="projects-content fade-in">
-                <h2>My Projects</h2>
-                <p class="projects-subtitle">Showcasing my passion for creating engaging digital experiences</p>
-                <div class="projects-grid" id="projectsGrid">
-                    <!-- Projects will be dynamically generated here -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section">
-        <div class="container">
-            <div class="skills-content fade-in">
-                <h2>My Skills</h2>
-                <p class="skills-subtitle">Proficiency levels in core frontend technologies</p>
-                <div class="skills-grid" id="skillsGrid">
-                    <!-- Skills will be dynamically generated here -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section">
-        <div class="container">
-            <div class="contact-content fade-in">
-                <h2>Get In Touch</h2>
-                <p>I'm always interested in new opportunities and collaborations. Let's create something amazing
-                    together!</p>
-                <form class="contact-form fade-in fade-in-delay-1" id="contactForm" novalidate>
-                    <div class="form-group" id="nameGroup">
-                        <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" required minlength="2" maxlength="50"
-                            placeholder="Enter your full name" autocomplete="name" aria-describedby="nameError">
-                        <div class="error-message" id="nameError" role="alert"></div>
-                        <div class="success-message" id="nameSuccess"></div>
-                    </div>
-                    <div class="form-group" id="emailGroup">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" required placeholder="Enter your email address"
-                            autocomplete="email" aria-describedby="emailError">
-                        <div class="error-message" id="emailError" role="alert"></div>
-                        <div class="success-message" id="emailSuccess"></div>
-                    </div>
-                    <div class="form-group" id="messageGroup">
-                        <label for="message">Message *</label>
-                        <textarea id="message" name="message" required minlength="10" maxlength="1000"
-                            placeholder="Tell me about your project or how we can work together..."
-                            aria-describedby="messageError"></textarea>
-                        <div class="error-message" id="messageError" role="alert"></div>
-                        <div class="success-message" id="messageSuccess"></div>
-                    </div>
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        <span>Send Message</span>
+                    <!-- Call-to-action button that scrolls to projects section -->
+                    <button class="cta-button" onclick="scrollToSection('projects')"
+                        aria-label="View my work - scroll to projects section" type="button">
+                        View My Work
                     </button>
-                </form>
-                <div class="form-success-message" id="formSuccessMessage">
-                    Thank you for your message! I'll get back to you within 24 hours.
+
+                    <!-- 
+                    Professional social/contact links in hero area
+                    Circular buttons with hover effects and accessibility features
+                    -->
+                    <nav class="hero-professional-links fade-in fade-in-delay-3" role="navigation"
+                        aria-label="Professional and social links">
+                        <!-- GitHub profile link -->
+                        <a href="https://github.com/tumelo-suping" class="hero-professional-link" target="_blank"
+                            rel="noopener noreferrer" aria-label="Visit Tumelo's GitHub profile (opens in new tab)"
+                            title="GitHub Profile">
+                            <span aria-hidden="true">🐙</span>
+                            <span class="sr-only">GitHub</span>
+                        </a>
+
+                        <!-- LinkedIn profile link -->
+                        <a href="https://linkedin.com/in/tumelo-suping" class="hero-professional-link" target="_blank"
+                            rel="noopener noreferrer" aria-label="Connect with Tumelo on LinkedIn (opens in new tab)"
+                            title="LinkedIn Profile">
+                            <span aria-hidden="true">💼</span>
+                            <span class="sr-only">LinkedIn</span>
+                        </a>
+
+                        <!-- Email contact link -->
+                        <a href="mailto:tumelo.suping@example.com" class="hero-professional-link"
+                            aria-label="Send email to Tumelo" title="Send Email">
+                            <span aria-hidden="true">📧</span>
+                            <span class="sr-only">Email</span>
+                        </a>
+                    </nav>
+                </header>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section" role="region" aria-labelledby="about-heading">
+            <div class="container">
+                <div class="about-content">
+                    <article class="about-text fade-in slide-in-left">
+                        <h2 id="about-heading">About Me</h2>
+                        <p>I'm <span class="highlight">Tumelo Suping</span>, a passionate frontend developer with a love
+                            for
+                            creating beautiful, functional web experiences. I specialize in modern web technologies and
+                            enjoy bringing creative ideas to life through code.</p>
+                        <p>My journey in web development started with curiosity and has evolved into a dedication to
+                            crafting <span class="highlight">digital stories</span> that engage and inspire users. I
+                            believe
+                            in the power of clean code, intuitive design, and seamless user experiences.</p>
+                        <p>As a <span class="highlight">Creative Technologist</span>, I bridge the gap between design
+                            and
+                            development, ensuring that every project not only looks great but performs exceptionally
+                            across
+                            all devices and platforms.</p>
+
+                        <div class="about-stats fade-in fade-in-delay-1" role="group"
+                            aria-label="Professional statistics">
+                            <div class="stat-item scale-in" role="img" aria-label="3 plus years of experience">
+                                <span class="stat-number" aria-hidden="true">3+</span>
+                                <span class="stat-label">Years Experience</span>
+                            </div>
+                            <div class="stat-item scale-in fade-in-delay-1" role="img"
+                                aria-label="50 plus projects completed">
+                                <span class="stat-number" aria-hidden="true">50+</span>
+                                <span class="stat-label">Projects Completed</span>
+                            </div>
+                            <div class="stat-item scale-in fade-in-delay-2" role="img"
+                                aria-label="100 percent client satisfaction">
+                                <span class="stat-number" aria-hidden="true">100%</span>
+                                <span class="stat-label">Client Satisfaction</span>
+                            </div>
+                        </div>
+
+                        <div class="about-cta fade-in fade-in-delay-2">
+                            <a href="#contact" class="about-btn" onclick="scrollToSection('contact'); return false;"
+                                aria-label="Let's work together - go to contact section">Let's
+                                Work Together</a>
+                        </div>
+                    </article>
+
+                    <aside class="about-tech fade-in slide-in-right" role="complementary"
+                        aria-labelledby="tech-stack-heading">
+                        <h3 id="tech-stack-heading">My Tech Stack</h3>
+                        <div class="tech-items" role="list" aria-label="Technical skills and proficiency levels">
+                            <div class="tech-item fade-in scale-in" style="--progress-width: 95%;" role="listitem"
+                                tabindex="0"
+                                aria-label="HTML5: 95% proficiency - Semantic markup and accessibility best practices">
+                                <span class="tech-icon" aria-hidden="true">🌐</span>
+                                <div class="tech-name">HTML5</div>
+                                <div class="tech-description">Semantic markup and accessibility best practices</div>
+                                <div class="tech-level" role="progressbar" aria-valuenow="95" aria-valuemin="0"
+                                    aria-valuemax="100" aria-label="HTML5 proficiency: 95%">
+                                    <div class="tech-progress"></div>
+                                </div>
+                            </div>
+                            <div class="tech-item fade-in scale-in fade-in-delay-1" style="--progress-width: 90%;"
+                                role="listitem" tabindex="0"
+                                aria-label="CSS3: 90% proficiency - Advanced layouts, animations, and responsive design">
+                                <span class="tech-icon" aria-hidden="true">🎨</span>
+                                <div class="tech-name">CSS3</div>
+                                <div class="tech-description">Advanced layouts, animations, and responsive design</div>
+                                <div class="tech-level" role="progressbar" aria-valuenow="90" aria-valuemin="0"
+                                    aria-valuemax="100" aria-label="CSS3 proficiency: 90%">
+                                    <div class="tech-progress"></div>
+                                </div>
+                            </div>
+                            <div class="tech-item fade-in scale-in fade-in-delay-2" style="--progress-width: 85%;"
+                                role="listitem" tabindex="0"
+                                aria-label="JavaScript: 85% proficiency - ES6+, DOM manipulation, and interactive features">
+                                <span class="tech-icon" aria-hidden="true">⚡</span>
+                                <div class="tech-name">JavaScript</div>
+                                <div class="tech-description">ES6+, DOM manipulation, and interactive features</div>
+                                <div class="tech-level" role="progressbar" aria-valuenow="85" aria-valuemin="0"
+                                    aria-valuemax="100" aria-label="JavaScript proficiency: 85%">
+                                    <div class="tech-progress"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Back to Top Button -->
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="projects-content fade-in">
+                    <h2>My Projects</h2>
+                    <p class="projects-subtitle">Showcasing my passion for creating engaging digital experiences</p>
+                    <div class="projects-grid" id="projectsGrid">
+                        <!-- Projects will be dynamically generated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="container">
+                <div class="skills-content fade-in">
+                    <h2>My Skills</h2>
+                    <p class="skills-subtitle">Proficiency levels in core frontend technologies</p>
+                    <div class="skills-grid" id="skillsGrid">
+                        <!-- Skills will be dynamically generated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="contact-content fade-in">
+                    <h2>Get In Touch</h2>
+                    <p>I'm always interested in new opportunities and collaborations. Let's create something amazing
+                        together!</p>
+
+                    <!-- Contact Information Display -->
+                    <div class="contact-info fade-in fade-in-delay-1">
+                        <h3>Contact Information</h3>
+                        <div class="contact-info-item">
+                            <span class="contact-info-icon">📧</span>
+                            <span class="contact-info-text">tumelo.suping@example.com</span>
+                        </div>
+                        <div class="contact-info-item">
+                            <span class="contact-info-icon">📱</span>
+                            <span class="contact-info-text">+27 (0) 123 456 789</span>
+                        </div>
+                        <div class="contact-info-item">
+                            <span class="contact-info-icon">📍</span>
+                            <span class="contact-info-text">Johannesburg, South Africa</span>
+                        </div>
+                    </div>
+
+                    <!-- Professional Links -->
+                    <div class="professional-links fade-in fade-in-delay-2">
+                        <a href="https://github.com/tumelo-suping" class="professional-link" target="_blank"
+                            rel="noopener noreferrer" aria-label="Visit Tumelo's GitHub profile">
+                            <span class="professional-link-icon">🐙</span>
+                            <span class="professional-link-text">GitHub</span>
+                        </a>
+                        <a href="https://linkedin.com/in/tumelo-suping" class="professional-link" target="_blank"
+                            rel="noopener noreferrer" aria-label="Connect with Tumelo on LinkedIn">
+                            <span class="professional-link-icon">💼</span>
+                            <span class="professional-link-text">LinkedIn</span>
+                        </a>
+                        <a href="mailto:tumelo.suping@example.com" class="professional-link"
+                            aria-label="Send email to Tumelo">
+                            <span class="professional-link-icon">📧</span>
+                            <span class="professional-link-text">Email Me</span>
+                        </a>
+                    </div>
+
+                    <form class="contact-form fade-in fade-in-delay-3" id="contactForm" novalidate>
+                        <div class="form-group" id="nameGroup">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required minlength="2" maxlength="50"
+                                placeholder="Enter your full name" autocomplete="name" aria-describedby="nameError">
+                            <div class="error-message" id="nameError" role="alert"></div>
+                            <div class="success-message" id="nameSuccess"></div>
+                        </div>
+                        <div class="form-group" id="emailGroup">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email address"
+                                autocomplete="email" aria-describedby="emailError">
+                            <div class="error-message" id="emailError" role="alert"></div>
+                            <div class="success-message" id="emailSuccess"></div>
+                        </div>
+                        <div class="form-group" id="messageGroup">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" required minlength="10" maxlength="1000"
+                                placeholder="Tell me about your project or how we can work together..."
+                                aria-describedby="messageError"></textarea>
+                            <div class="error-message" id="messageError" role="alert"></div>
+                            <div class="success-message" id="messageSuccess"></div>
+                        </div>
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span>Send Message</span>
+                        </button>
+                    </form>
+                    <div class="form-success-message" id="formSuccessMessage">
+                        Thank you for your message! I'll get back to you within 24 hours.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main> <!-- End of main content -->
+
+    <!-- 
+    BACK-TO-TOP BUTTON
+    ------------------
+    Floating button that appears when user scrolls down and provides
+    smooth scroll back to the top of the page. Features fade-in/out
+    animations and accessibility support for keyboard users.
+    -->
     <button class="back-to-top" id="backToTop" aria-label="Back to top" title="Back to top">
-        <span class="back-to-top-icon">↑</span>
+        <span class="back-to-top-icon">↑</span> <!-- Up arrow icon -->
     </button>
 
-    <!-- JavaScript -->
+    <!-- 
+    =============================================================================
+    JAVASCRIPT - INTERACTIVE FUNCTIONALITY
+    =============================================================================
+    
+    This script contains all the interactive functionality for the portfolio website,
+    organized into modular classes for maintainability and reusability:
+    
+    1. NavigationController - Handles navigation, mobile menu, smooth scrolling
+    2. ColorManager - Manages RGB color customization system
+    3. AnimationController - Controls scroll-triggered animations
+    4. SkillsManager - Manages skills section and progress animations
+    5. ProjectsManager - Handles project cards and interactions
+    6. ContactFormManager - Form validation and submission handling
+    7. BackToTopManager - Back-to-top button functionality
+    8. ProfessionalLinksManager - Professional links interactions
+    
+    Each class is self-contained with proper error handling and accessibility features.
+    =============================================================================
+    -->
     <script>
-        // Navigation Controller Class
+        /* 
+        =============================================================================
+        NAVIGATION CONTROLLER CLASS
+        =============================================================================
+        
+        Manages all navigation-related functionality including:
+        - Mobile hamburger menu toggle
+        - Smooth scrolling between sections
+        - Active section highlighting
+        - Navbar scroll effects
+        - Keyboard navigation support
+        - Accessibility features
+        */
         class NavigationController {
+            /**
+             * Initialize the navigation controller with all required DOM elements
+             * and set up event listeners for various navigation features
+             */
             constructor() {
-                this.navToggle = document.getElementById('navToggle');
-                this.navMenu = document.getElementById('navMenu');
-                this.navLinks = document.querySelectorAll('.nav-link');
-                this.sections = document.querySelectorAll('.section');
-                this.navbar = document.querySelector('.navbar');
+                // Get DOM elements for navigation functionality
+                this.navToggle = document.getElementById('navToggle');     // Mobile menu toggle button
+                this.navMenu = document.getElementById('navMenu');         // Navigation menu container
+                this.navLinks = document.querySelectorAll('.nav-link');   // All navigation links
+                this.sections = document.querySelectorAll('.section');    // All page sections
+                this.navbar = document.querySelector('.navbar');          // Main navbar element
 
-                this.initializeMobileMenu();
-                this.initializeSmoothScroll();
-                this.initializeActiveSection();
-                this.initializeNavbarScroll();
-                this.initializeKeyboardNavigation();
+                // Initialize all navigation features
+                this.initializeMobileMenu();        // Mobile hamburger menu
+                this.initializeSmoothScroll();      // Smooth scrolling between sections
+                this.initializeActiveSection();     // Active section highlighting
+                this.initializeNavbarScroll();      // Navbar appearance changes on scroll
+                this.initializeKeyboardNavigation(); // Keyboard accessibility
             }
 
-            // Mobile Navigation Toggle
+            /**
+             * MOBILE MENU INITIALIZATION
+             * -------------------------
+             * Sets up the mobile hamburger menu with proper event listeners
+             * and accessibility features for touch and keyboard users
+             */
             initializeMobileMenu() {
+                // Only initialize if required elements exist
                 if (this.navToggle && this.navMenu) {
+                    // Main toggle button click handler
                     this.navToggle.addEventListener('click', () => {
                         this.toggleMobileMenu();
                     });
 
-                    // Close mobile menu when clicking on a link
+                    // Auto-close menu when navigation links are clicked
                     this.navLinks.forEach(link => {
                         link.addEventListener('click', () => {
                             this.closeMobileMenu();
                         });
                     });
 
-                    // Close mobile menu when clicking outside
+                    // Close menu when clicking outside the navigation area
                     document.addEventListener('click', (e) => {
                         if (!this.navbar.contains(e.target) && this.navMenu.classList.contains('active')) {
                             this.closeMobileMenu();
                         }
                     });
 
-                    // Close mobile menu on escape key
+                    // Close menu with Escape key for keyboard users
                     document.addEventListener('keydown', (e) => {
                         if (e.key === 'Escape' && this.navMenu.classList.contains('active')) {
                             this.closeMobileMenu();
@@ -2591,62 +3573,135 @@
                 });
             }
 
-            // Keyboard navigation support
+            // Enhanced keyboard navigation support with error handling
             initializeKeyboardNavigation() {
-                this.navLinks.forEach((link, index) => {
-                    link.addEventListener('keydown', (e) => {
-                        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-                            e.preventDefault();
-                            const nextIndex = (index + 1) % this.navLinks.length;
-                            this.navLinks[nextIndex].focus();
-                        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-                            e.preventDefault();
-                            const prevIndex = (index - 1 + this.navLinks.length) % this.navLinks.length;
-                            this.navLinks[prevIndex].focus();
-                        }
-                    });
-                });
+                try {
+                    this.navLinks.forEach((link, index) => {
+                        link.addEventListener('keydown', (e) => {
+                            try {
+                                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                                    e.preventDefault();
+                                    const nextIndex = (index + 1) % this.navLinks.length;
+                                    this.navLinks[nextIndex].focus();
+                                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                                    e.preventDefault();
+                                    const prevIndex = (index - 1 + this.navLinks.length) % this.navLinks.length;
+                                    this.navLinks[prevIndex].focus();
+                                } else if (e.key === 'Home') {
+                                    e.preventDefault();
+                                    this.navLinks[0].focus();
+                                } else if (e.key === 'End') {
+                                    e.preventDefault();
+                                    this.navLinks[this.navLinks.length - 1].focus();
+                                }
+                            } catch (error) {
+                                console.error('Error in navigation keyboard handler:', error);
+                            }
+                        });
 
-                // Mobile toggle keyboard support
-                if (this.navToggle) {
-                    this.navToggle.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            this.toggleMobileMenu();
-                        }
+                        // Add focus indicators
+                        link.addEventListener('focus', () => {
+                            link.setAttribute('data-focused', 'true');
+                        });
+
+                        link.addEventListener('blur', () => {
+                            link.removeAttribute('data-focused');
+                        });
                     });
 
-                    // Make toggle focusable and accessible
-                    this.navToggle.setAttribute('tabindex', '0');
-                    this.navToggle.setAttribute('role', 'button');
-                    this.navToggle.setAttribute('aria-label', 'Toggle navigation menu');
-                    this.navToggle.setAttribute('aria-expanded', 'false');
+                    // Enhanced mobile toggle keyboard support
+                    if (this.navToggle) {
+                        this.navToggle.addEventListener('keydown', (e) => {
+                            try {
+                                if (e.key === 'Enter' || e.key === ' ') {
+                                    e.preventDefault();
+                                    this.toggleMobileMenu();
+                                } else if (e.key === 'Escape' && this.navMenu.classList.contains('active')) {
+                                    e.preventDefault();
+                                    this.closeMobileMenu();
+                                }
+                            } catch (error) {
+                                console.error('Error in mobile toggle keyboard handler:', error);
+                            }
+                        });
+
+                        // Enhanced accessibility attributes
+                        this.navToggle.setAttribute('tabindex', '0');
+                        this.navToggle.setAttribute('role', 'button');
+                        this.navToggle.setAttribute('aria-label', 'Toggle navigation menu');
+                        this.navToggle.setAttribute('aria-expanded', 'false');
+                        this.navToggle.setAttribute('aria-controls', 'navMenu');
+                    }
+
+                    // Add skip links functionality
+                    const skipLink = document.querySelector('.skip-to-main');
+                    if (skipLink) {
+                        skipLink.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const mainContent = document.getElementById('main-content');
+                            if (mainContent) {
+                                mainContent.focus();
+                                mainContent.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error initializing keyboard navigation:', error);
                 }
             }
         }
 
-        // Color Management System
+        /* 
+        =============================================================================
+        COLOR MANAGEMENT SYSTEM CLASS
+        =============================================================================
+        
+        Manages the real-time RGB color customization system that allows users to
+        dynamically change the website's color scheme. Features include:
+        
+        - RGB sliders (0-255 range) for real-time color adjustment
+        - Automatic contrast calculation for text readability
+        - Smooth color transitions with performance optimization
+        - Color preview with live updates
+        - Reset to default functionality
+        - Keyboard shortcuts for color testing
+        - Performance monitoring for smooth animations
+        */
         class ColorManager {
+            /**
+             * Initialize the color management system with all required DOM elements
+             * and set up the default color scheme
+             */
             constructor() {
-                this.panel = document.getElementById('colorPanel');
-                this.toggle = document.getElementById('panelToggle');
-                this.content = document.getElementById('panelContent');
-                this.rSlider = document.getElementById('r-slider');
-                this.gSlider = document.getElementById('g-slider');
-                this.bSlider = document.getElementById('b-slider');
-                this.rValue = document.getElementById('r-value');
-                this.gValue = document.getElementById('g-value');
-                this.bValue = document.getElementById('b-value');
-                this.colorPreview = document.getElementById('colorPreview');
-                this.previewText = document.getElementById('previewText');
-                this.resetBtn = document.getElementById('resetColors');
+                // Get all DOM elements for the color panel interface
+                this.panel = document.getElementById('colorPanel');           // Main color panel container
+                this.toggle = document.getElementById('panelToggle');         // Panel expand/collapse button
+                this.content = document.getElementById('panelContent');       // Panel content area
 
-                this.defaultColors = { r: 128, g: 128, b: 128 };
-                this.isExpanded = false;
+                // RGB slider elements for color adjustment
+                this.rSlider = document.getElementById('r-slider');           // Red color slider
+                this.gSlider = document.getElementById('g-slider');           // Green color slider
+                this.bSlider = document.getElementById('b-slider');           // Blue color slider
 
-                this.initializePanel();
-                this.bindEvents();
-                this.updateColors();
+                // Value display elements showing current RGB values
+                this.rValue = document.getElementById('r-value');             // Red value display
+                this.gValue = document.getElementById('g-value');             // Green value display
+                this.bValue = document.getElementById('b-value');             // Blue value display
+
+                // Color preview and control elements
+                this.colorPreview = document.getElementById('colorPreview');  // Color preview box
+                this.previewText = document.getElementById('previewText');    // Preview text element
+                this.resetBtn = document.getElementById('resetColors');       // Reset button
+
+                // Configuration and state management
+                this.defaultColors = { r: 128, g: 128, b: 128 };            // Default gray color scheme
+                this.isExpanded = false;                                      // Panel expansion state
+
+                // Initialize all color system components
+                this.initializePanel();           // Set up initial panel state
+                this.bindEvents();               // Attach event listeners
+                this.updateColors();             // Apply initial colors
+                this.initializeColorTransitions(); // Set up smooth transitions
             }
 
             initializePanel() {
@@ -2657,6 +3712,50 @@
 
                 // Update display values
                 this.updateValueDisplays();
+            }
+
+            initializeColorTransitions() {
+                // Apply initial smooth transition classes to all relevant elements
+                this.applyColorTransitions();
+
+                // Set up performance monitoring (optional, for development)
+                if (window.location.search.includes('debug=true')) {
+                    console.log('Color transition debugging enabled');
+                    this.monitorTransitionPerformance();
+                }
+
+                // Add keyboard shortcuts for color testing (development feature)
+                this.addColorTestingShortcuts();
+            }
+
+            addColorTestingShortcuts() {
+                document.addEventListener('keydown', (e) => {
+                    // Only enable shortcuts when color panel is expanded and Ctrl is held
+                    if (!this.isExpanded || !e.ctrlKey) return;
+
+                    switch (e.key) {
+                        case '1':
+                            e.preventDefault();
+                            this.animateToColor(255, 100, 100); // Red
+                            break;
+                        case '2':
+                            e.preventDefault();
+                            this.animateToColor(100, 255, 100); // Green
+                            break;
+                        case '3':
+                            e.preventDefault();
+                            this.animateToColor(100, 100, 255); // Blue
+                            break;
+                        case '0':
+                            e.preventDefault();
+                            this.animateToColor(128, 128, 128); // Default
+                            break;
+                        case 't':
+                            e.preventDefault();
+                            this.testColorTransitions();
+                            break;
+                    }
+                });
             }
 
             bindEvents() {
@@ -2719,31 +3818,94 @@
             }
 
             updateColors() {
+                try {
+                    // Use requestAnimationFrame for smooth performance
+                    if (this.colorUpdateFrame) {
+                        cancelAnimationFrame(this.colorUpdateFrame);
+                    }
+
+                    this.colorUpdateFrame = requestAnimationFrame(() => {
+                        try {
+                            const r = parseInt(this.rSlider.value);
+                            const g = parseInt(this.gSlider.value);
+                            const b = parseInt(this.bSlider.value);
+
+                            // Validate color values with error handling
+                            const validR = this.validateColorValue(r);
+                            const validG = this.validateColorValue(g);
+                            const validB = this.validateColorValue(b);
+
+                            // Update display values
+                            this.updateValueDisplays();
+
+                            // Calculate colors with enhanced contrast
+                            const bgColor = `rgb(${validR}, ${validG}, ${validB})`;
+                            const textColor = this.getContrastColor(validR, validG, validB);
+                            const accentColor = this.calculateAccentColor(validR, validG, validB);
+
+                            // Apply colors using CSS custom properties with smooth transitions
+                            this.applyColorProperties(bgColor, textColor, accentColor);
+
+                            // Update preview with enhanced styling
+                            this.updatePreview(bgColor, textColor);
+
+                            // Add smooth transition effects
+                            this.addTransitionEffect();
+
+                            // Store current colors for comparison
+                            this.lastColors = { r: validR, g: validG, b: validB };
+
+                            // Performance monitoring (optional)
+                            if (this.performanceMonitoring) {
+                                this.monitorColorUpdatePerformance();
+                            }
+                        } catch (error) {
+                            console.error('Error updating colors:', error);
+                            // Fallback to safe default colors
+                            this.resetToDefault();
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error in updateColors method:', error);
+                }
+            }
+
+            applyColorProperties(bgColor, textColor, accentColor) {
+                const root = document.documentElement;
+
+                // Apply primary colors
+                root.style.setProperty('--primary-bg', bgColor);
+                root.style.setProperty('--primary-text', textColor);
+
+                // Apply enhanced accent color if calculated
+                if (accentColor) {
+                    root.style.setProperty('--accent-color', accentColor);
+                }
+
+                // Apply additional color variations for better theming
                 const r = parseInt(this.rSlider.value);
                 const g = parseInt(this.gSlider.value);
                 const b = parseInt(this.bSlider.value);
 
-                // Validate color values
-                const validR = this.validateColorValue(r);
-                const validG = this.validateColorValue(g);
-                const validB = this.validateColorValue(b);
+                // Create lighter and darker variations
+                const lighterBg = `rgba(${Math.min(255, r + 30)}, ${Math.min(255, g + 30)}, ${Math.min(255, b + 30)}, 0.8)`;
+                const darkerBg = `rgba(${Math.max(0, r - 30)}, ${Math.max(0, g - 30)}, ${Math.max(0, b - 30)}, 0.9)`;
 
-                // Update display values
-                this.updateValueDisplays();
+                root.style.setProperty('--primary-bg-light', lighterBg);
+                root.style.setProperty('--primary-bg-dark', darkerBg);
+            }
 
-                // Calculate colors
-                const bgColor = `rgb(${validR}, ${validG}, ${validB})`;
-                const textColor = this.getContrastColor(validR, validG, validB);
+            calculateAccentColor(r, g, b) {
+                // Calculate a complementary accent color based on the primary color
+                const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
 
-                // Apply colors using CSS custom properties
-                document.documentElement.style.setProperty('--primary-bg', bgColor);
-                document.documentElement.style.setProperty('--primary-text', textColor);
-
-                // Update preview
-                this.updatePreview(bgColor, textColor);
-
-                // Smooth transition effect
-                this.addTransitionEffect();
+                if (luminance > 0.5) {
+                    // For light backgrounds, use a darker, more saturated accent
+                    return `rgb(${Math.max(0, r - 80)}, ${Math.max(0, g - 40)}, ${Math.min(255, b + 60)})`;
+                } else {
+                    // For dark backgrounds, use a lighter, more vibrant accent
+                    return `rgb(${Math.min(255, r + 60)}, ${Math.min(255, g + 80)}, ${Math.min(255, b + 100)})`;
+                }
             }
 
             updateValueDisplays() {
@@ -2760,12 +3922,17 @@
             }
 
             validateColorValue(value) {
-                const numValue = parseInt(value);
-                if (isNaN(numValue) || numValue < 0 || numValue > 255) {
-                    console.warn('Invalid color value, using default');
-                    return 128;
+                try {
+                    const numValue = parseInt(value);
+                    if (isNaN(numValue) || numValue < 0 || numValue > 255) {
+                        console.warn(`Invalid color value: ${value}, using default (128)`);
+                        return 128;
+                    }
+                    return numValue;
+                } catch (error) {
+                    console.error('Error validating color value:', error);
+                    return 128; // Safe fallback
                 }
-                return numValue;
             }
 
             getContrastColor(r, g, b) {
@@ -2777,13 +3944,142 @@
             }
 
             addTransitionEffect() {
-                // Add smooth transition class to body for color changes
-                document.body.style.transition = 'all 0.3s ease';
+                // Add smooth color transition animation to all relevant elements
+                this.applyColorTransitions();
 
-                // Remove transition after animation completes to avoid interfering with other animations
+                // Add visual feedback animation
+                this.addColorChangeAnimation();
+
+                // Update background gradients smoothly
+                this.updateBackgroundGradients();
+            }
+
+            applyColorTransitions() {
+                // Get all elements that should have smooth color transitions
+                const colorElements = [
+                    'body',
+                    '.section',
+                    '.nav-logo',
+                    '.hero-title',
+                    '.hero-tagline',
+                    '.about-content h2',
+                    '.about-text p',
+                    '.stat-item',
+                    '.tech-item',
+                    '.projects-content h2',
+                    '.projects-subtitle',
+                    '.project-card',
+                    '.project-title',
+                    '.project-description',
+                    '.skills-content h2',
+                    '.skills-subtitle',
+                    '.skill-item',
+                    '.skill-name',
+                    '.skill-description',
+                    '.contact-content h2',
+                    '.contact-content p',
+                    '.form-group input',
+                    '.form-group textarea',
+                    '.form-group label'
+                ];
+
+                // Apply smooth transition classes
+                colorElements.forEach(selector => {
+                    const elements = document.querySelectorAll(selector);
+                    elements.forEach(element => {
+                        element.classList.add('smooth-color-transition');
+                    });
+                });
+            }
+
+            addColorChangeAnimation() {
+                // Add visual feedback for color changes
+                const body = document.body;
+                body.classList.add('color-transition-active');
+
+                // Remove animation class after completion
                 setTimeout(() => {
-                    document.body.style.transition = '';
-                }, 300);
+                    body.classList.remove('color-transition-active');
+                }, 600);
+
+                // Add ripple effect from color panel
+                this.createColorRippleEffect();
+            }
+
+            createColorRippleEffect() {
+                // Create a subtle ripple effect emanating from the color panel
+                const ripple = document.createElement('div');
+                ripple.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    right: 45px;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, var(--primary-bg) 0%, transparent 70%);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 998;
+                    animation: colorRipple 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+                `;
+
+                document.body.appendChild(ripple);
+
+                // Remove ripple after animation
+                setTimeout(() => {
+                    if (ripple.parentNode) {
+                        ripple.parentNode.removeChild(ripple);
+                    }
+                }, 800);
+            }
+
+            updateBackgroundGradients() {
+                // Update section backgrounds with smooth gradient transitions
+                const r = parseInt(this.rSlider.value);
+                const g = parseInt(this.gSlider.value);
+                const b = parseInt(this.bSlider.value);
+
+                const primaryBg = `rgb(${r}, ${g}, ${b})`;
+                const lighterBg = `rgba(${r}, ${g}, ${b}, 0.8)`;
+                const darkerBg = `rgba(${Math.max(0, r - 20)}, ${Math.max(0, g - 20)}, ${Math.max(0, b - 20)}, 0.9)`;
+
+                // Update home section background
+                const homeSection = document.getElementById('home');
+                if (homeSection) {
+                    homeSection.style.background = `linear-gradient(135deg, ${primaryBg}, ${lighterBg})`;
+                }
+
+                // Update body background with enhanced gradient
+                document.body.style.background = `
+                    linear-gradient(135deg, ${primaryBg}, ${lighterBg}),
+                    radial-gradient(circle at 50% 50%, rgba(0, 123, 255, 0.02) 0%, transparent 70%)
+                `;
+
+                // Update other sections with subtle background variations
+                this.updateSectionBackgrounds(r, g, b);
+            }
+
+            updateSectionBackgrounds(r, g, b) {
+                const sections = [
+                    { id: 'about', opacity: 0.08 },
+                    { id: 'projects', opacity: 0.12 },
+                    { id: 'skills', opacity: 0.08 },
+                    { id: 'contact', opacity: 0.12 }
+                ];
+
+                sections.forEach(({ id, opacity }) => {
+                    const section = document.getElementById(id);
+                    if (section) {
+                        const sectionBg = `rgba(${r}, ${g}, ${b}, ${opacity})`;
+                        const gradientBg = id === 'projects' || id === 'contact'
+                            ? `linear-gradient(135deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.08) 100%)`
+                            : `linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%)`;
+
+                        section.style.background = `
+                            ${gradientBg},
+                            radial-gradient(circle at 50% 50%, ${sectionBg} 0%, transparent 50%)
+                        `;
+                    }
+                });
             }
 
             resetToDefault() {
@@ -2816,99 +4112,360 @@
                 this.bSlider.value = this.validateColorValue(b);
                 this.updateColors();
             }
-        }
 
-        // Animation Controller Class for Scroll-Triggered Animations
-        class AnimationController {
-            constructor() {
-                this.observerOptions = {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
+            // Test color transitions with various RGB combinations
+            testColorTransitions() {
+                const testColors = [
+                    { r: 255, g: 100, b: 100, name: 'Red Theme' },
+                    { r: 100, g: 255, b: 100, name: 'Green Theme' },
+                    { r: 100, g: 100, b: 255, name: 'Blue Theme' },
+                    { r: 255, g: 200, b: 100, name: 'Orange Theme' },
+                    { r: 200, g: 100, b: 255, name: 'Purple Theme' },
+                    { r: 100, g: 255, b: 200, name: 'Cyan Theme' },
+                    { r: 128, g: 128, b: 128, name: 'Default Theme' }
+                ];
+
+                let currentIndex = 0;
+
+                const cycleColors = () => {
+                    if (currentIndex < testColors.length) {
+                        const color = testColors[currentIndex];
+                        console.log(`Testing ${color.name}: RGB(${color.r}, ${color.g}, ${color.b})`);
+
+                        this.setColors(color.r, color.g, color.b);
+                        currentIndex++;
+
+                        setTimeout(cycleColors, 2000); // 2 second intervals
+                    } else {
+                        console.log('Color transition test completed');
+                    }
                 };
 
+                console.log('Starting color transition test...');
+                cycleColors();
+            }
+
+            // Performance monitoring for color transitions
+            monitorTransitionPerformance() {
+                let frameCount = 0;
+                let startTime = performance.now();
+                let isMonitoring = true;
+
+                const countFrames = () => {
+                    if (!isMonitoring) return;
+
+                    frameCount++;
+                    const currentTime = performance.now();
+
+                    if (currentTime - startTime >= 1000) {
+                        const fps = Math.round(frameCount * 1000 / (currentTime - startTime));
+                        console.log(`Color Transition FPS: ${fps}`);
+
+                        frameCount = 0;
+                        startTime = currentTime;
+                    }
+
+                    requestAnimationFrame(countFrames);
+                };
+
+                requestAnimationFrame(countFrames);
+
+                // Stop monitoring after 10 seconds
+                setTimeout(() => {
+                    isMonitoring = false;
+                    console.log('Performance monitoring stopped');
+                }, 10000);
+
+                return () => { isMonitoring = false; };
+            }
+
+            // Smooth color interpolation for animated transitions
+            animateToColor(targetR, targetG, targetB, duration = 1000) {
+                const startR = parseInt(this.rSlider.value);
+                const startG = parseInt(this.gSlider.value);
+                const startB = parseInt(this.bSlider.value);
+
+                const deltaR = targetR - startR;
+                const deltaG = targetG - startG;
+                const deltaB = targetB - startB;
+
+                const startTime = performance.now();
+
+                const animate = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    // Use easing function for smooth animation
+                    const easeProgress = this.easeInOutCubic(progress);
+
+                    const currentR = Math.round(startR + deltaR * easeProgress);
+                    const currentG = Math.round(startG + deltaG * easeProgress);
+                    const currentB = Math.round(startB + deltaB * easeProgress);
+
+                    this.rSlider.value = currentR;
+                    this.gSlider.value = currentG;
+                    this.bSlider.value = currentB;
+
+                    this.updateColors();
+
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+
+                requestAnimationFrame(animate);
+            }
+
+            // Easing function for smooth animations
+            easeInOutCubic(t) {
+                return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            }
+
+            // Performance monitoring for color updates
+            monitorColorUpdatePerformance() {
+                if (!this.performanceData) {
+                    this.performanceData = {
+                        updateCount: 0,
+                        totalTime: 0,
+                        maxTime: 0,
+                        minTime: Infinity
+                    };
+                }
+
+                const startTime = performance.now();
+
+                // Monitor next frame
+                requestAnimationFrame(() => {
+                    const endTime = performance.now();
+                    const duration = endTime - startTime;
+
+                    this.performanceData.updateCount++;
+                    this.performanceData.totalTime += duration;
+                    this.performanceData.maxTime = Math.max(this.performanceData.maxTime, duration);
+                    this.performanceData.minTime = Math.min(this.performanceData.minTime, duration);
+
+                    // Log performance data every 100 updates
+                    if (this.performanceData.updateCount % 100 === 0) {
+                        const avgTime = this.performanceData.totalTime / this.performanceData.updateCount;
+                        console.log('Color Update Performance:', {
+                            averageTime: avgTime.toFixed(2) + 'ms',
+                            maxTime: this.performanceData.maxTime.toFixed(2) + 'ms',
+                            minTime: this.performanceData.minTime.toFixed(2) + 'ms',
+                            totalUpdates: this.performanceData.updateCount
+                        });
+
+                        // Warn if performance is poor
+                        if (avgTime > 16.67) { // 60fps threshold
+                            console.warn('Color updates may be affecting 60fps performance');
+                        }
+                    }
+                });
+            }
+
+            // Browser compatibility checks
+            checkBrowserCompatibility() {
+                const compatibility = {
+                    cssCustomProperties: CSS && CSS.supports && CSS.supports('--test', 'value'),
+                    requestAnimationFrame: typeof requestAnimationFrame !== 'undefined',
+                    intersectionObserver: 'IntersectionObserver' in window,
+                    clipboardAPI: navigator.clipboard && typeof navigator.clipboard.writeText === 'function',
+                    passiveEventListeners: (() => {
+                        let supportsPassive = false;
+                        try {
+                            const opts = Object.defineProperty({}, 'passive', {
+                                get: () => { supportsPassive = true; }
+                            });
+                            window.addEventListener('testPassive', null, opts);
+                            window.removeEventListener('testPassive', null, opts);
+                        } catch (e) { }
+                        return supportsPassive;
+                    })()
+                };
+
+                // Log compatibility issues
+                Object.entries(compatibility).forEach(([feature, supported]) => {
+                    if (!supported) {
+                        console.warn(`Browser feature not supported: ${feature}`);
+                    }
+                });
+
+                return compatibility;
+            }
+
+            // Initialize with browser compatibility check
+            initializeWithCompatibilityCheck() {
+                const compatibility = this.checkBrowserCompatibility();
+
+                // Adjust functionality based on browser capabilities
+                if (!compatibility.cssCustomProperties) {
+                    console.warn('CSS Custom Properties not supported - color system may not work properly');
+                    return false;
+                }
+
+                if (!compatibility.requestAnimationFrame) {
+                    console.warn('requestAnimationFrame not supported - using setTimeout fallback');
+                    // Implement setTimeout fallback if needed
+                }
+
+                return true;
+            }
+        }
+
+        /* 
+        =============================================================================
+        ANIMATION CONTROLLER CLASS
+        =============================================================================
+        
+        Manages scroll-triggered animations throughout the website using the modern
+        Intersection Observer API with fallback support for older browsers.
+        
+        Features:
+        - Intersection Observer API for performance-optimized scroll detection
+        - Fallback scroll event handling for older browsers
+        - Multiple animation types (fade-in, slide-in, scale-in)
+        - Staggered animations with delays
+        - Special handling for progress bars and skill indicators
+        - Performance monitoring and optimization
+        */
+        class AnimationController {
+            /**
+             * Initialize the animation controller with proper browser feature detection
+             * and set up either modern Intersection Observer or fallback scroll handling
+             */
+            constructor() {
+                // Configuration for Intersection Observer API
+                this.observerOptions = {
+                    threshold: 0.1,                           // Trigger when 10% of element is visible
+                    rootMargin: '0px 0px -50px 0px'          // Trigger 50px before element enters viewport
+                };
+
+                // Get all elements that should be animated on scroll
                 this.animatedElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+
+                // Check for Intersection Observer support (modern browsers)
                 this.supportsIntersectionObserver = 'IntersectionObserver' in window;
 
+                // Initialize appropriate animation system based on browser support
                 if (this.supportsIntersectionObserver) {
-                    this.initializeIntersectionObserver();
+                    this.initializeIntersectionObserver();   // Modern approach for better performance
                 } else {
+                    this.initializeScrollFallback();         // Fallback for older browsers
+                }
+            }
+
+            // Modern approach using Intersection Observer API with error handling
+            initializeIntersectionObserver() {
+                try {
+                    this.observer = new IntersectionObserver((entries) => {
+                        // Use requestAnimationFrame for better performance
+                        requestAnimationFrame(() => {
+                            entries.forEach(entry => {
+                                try {
+                                    if (entry.isIntersecting) {
+                                        // Add visible class to trigger animation
+                                        entry.target.classList.add('visible');
+
+                                        // Special handling for tech items with progress bars
+                                        if (entry.target.classList.contains('tech-item')) {
+                                            this.animateTechProgress(entry.target);
+                                        }
+
+                                        // Special handling for skill items with progress animations
+                                        if (entry.target.classList.contains('skill-item')) {
+                                            this.animateSkillProgress(entry.target);
+                                        }
+
+                                        // Stop observing this element once animated
+                                        this.observer.unobserve(entry.target);
+                                    }
+                                } catch (error) {
+                                    console.error('Error processing intersection entry:', error);
+                                }
+                            });
+                        });
+                    }, this.observerOptions);
+
+                    // Start observing all animated elements with error handling
+                    this.animatedElements.forEach(element => {
+                        try {
+                            this.observer.observe(element);
+                        } catch (error) {
+                            console.error('Error observing element:', element, error);
+                            // Fallback: make element visible immediately
+                            element.classList.add('visible');
+                        }
+                    });
+                } catch (error) {
+                    console.error('Error initializing Intersection Observer:', error);
+                    // Fallback to scroll-based animation
                     this.initializeScrollFallback();
                 }
             }
 
-            // Modern approach using Intersection Observer API
-            initializeIntersectionObserver() {
-                this.observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            // Add visible class to trigger animation
-                            entry.target.classList.add('visible');
-
-                            // Special handling for tech items with progress bars
-                            if (entry.target.classList.contains('tech-item')) {
-                                this.animateTechProgress(entry.target);
-                            }
-
-                            // Special handling for skill items with progress animations
-                            if (entry.target.classList.contains('skill-item')) {
-                                this.animateSkillProgress(entry.target);
-                            }
-
-                            // Stop observing this element once animated
-                            this.observer.unobserve(entry.target);
-                        }
-                    });
-                }, this.observerOptions);
-
-                // Start observing all animated elements
-                this.animatedElements.forEach(element => {
-                    this.observer.observe(element);
-                });
-            }
-
-            // Fallback for browsers without Intersection Observer support
+            // Fallback for browsers without Intersection Observer support with performance optimizations
             initializeScrollFallback() {
                 let ticking = false;
+                let elementsToCheck = [...this.animatedElements]; // Copy array for performance
 
                 const checkElementsInView = () => {
-                    const windowHeight = window.innerHeight;
-                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    try {
+                        const windowHeight = window.innerHeight;
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-                    this.animatedElements.forEach(element => {
-                        if (!element.classList.contains('visible')) {
-                            const elementTop = element.offsetTop;
-                            const elementHeight = element.offsetHeight;
-                            const elementBottom = elementTop + elementHeight;
+                        // Filter out already visible elements for better performance
+                        elementsToCheck = elementsToCheck.filter(element => {
+                            try {
+                                if (!element.classList.contains('visible')) {
+                                    const rect = element.getBoundingClientRect();
+                                    const elementTop = rect.top + scrollTop;
+                                    const elementBottom = elementTop + rect.height;
 
-                            // Check if element is in viewport
-                            if (elementBottom >= scrollTop && elementTop <= scrollTop + windowHeight) {
-                                element.classList.add('visible');
+                                    // Check if element is in viewport with buffer
+                                    if (elementBottom >= scrollTop - 50 && elementTop <= scrollTop + windowHeight + 50) {
+                                        element.classList.add('visible');
 
-                                // Special handling for tech items with progress bars
-                                if (element.classList.contains('tech-item')) {
-                                    this.animateTechProgress(element);
+                                        // Special handling for tech items with progress bars
+                                        if (element.classList.contains('tech-item')) {
+                                            this.animateTechProgress(element);
+                                        }
+
+                                        // Special handling for skill items with progress animations
+                                        if (element.classList.contains('skill-item')) {
+                                            this.animateSkillProgress(element);
+                                        }
+
+                                        return false; // Remove from array
+                                    }
+                                    return true; // Keep in array
                                 }
-
-                                // Special handling for skill items with progress animations
-                                if (element.classList.contains('skill-item')) {
-                                    this.animateSkillProgress(element);
-                                }
+                                return false; // Remove from array (already visible)
+                            } catch (error) {
+                                console.error('Error checking element visibility:', error);
+                                return false; // Remove problematic element
                             }
-                        }
-                    });
+                        });
 
-                    ticking = false;
+                        ticking = false;
+
+                        // Stop checking if all elements are visible
+                        if (elementsToCheck.length === 0) {
+                            window.removeEventListener('scroll', handleScroll);
+                        }
+                    } catch (error) {
+                        console.error('Error in scroll fallback:', error);
+                        ticking = false;
+                    }
                 };
 
-                // Throttled scroll event listener
+                // Throttled scroll event listener with passive option for better performance
                 const handleScroll = () => {
-                    if (!ticking) {
+                    if (!ticking && elementsToCheck.length > 0) {
                         requestAnimationFrame(checkElementsInView);
                         ticking = true;
                     }
                 };
 
-                window.addEventListener('scroll', handleScroll);
+                window.addEventListener('scroll', handleScroll, { passive: true });
 
                 // Check initial state
                 checkElementsInView();
@@ -3000,19 +4557,40 @@
             }
         }
 
-        // Skills Data Structure and Management
+        /* 
+        =============================================================================
+        SKILLS MANAGER CLASS
+        =============================================================================
+        
+        Manages the skills section with dynamic content generation, interactive
+        progress indicators, and detailed skill information display.
+        
+        Features:
+        - Dynamic skill card generation from data structure
+        - Circular progress indicators with smooth animations
+        - Progress bar animations triggered by scroll
+        - Interactive hover effects and tooltips
+        - Responsive design with mobile optimizations
+        - Accessibility features including keyboard navigation
+        - Performance-optimized animations using requestAnimationFrame
+        */
         class SkillsManager {
+            /**
+             * Initialize the skills manager with predefined skill data
+             * and set up the skills section with interactive elements
+             */
             constructor() {
+                // Comprehensive skills data structure with detailed information
                 this.skillsData = [
                     {
                         id: 1,
                         name: "HTML5",
                         description: "Semantic markup and accessibility best practices",
-                        proficiency: 95,
-                        icon: "🌐",
-                        category: "Frontend",
-                        experience: "3+ years",
-                        projects: "50+ projects",
+                        proficiency: 95,                    // Skill level percentage (0-100)
+                        icon: "🌐",                         // Visual icon for the skill
+                        category: "Frontend",               // Skill category
+                        experience: "3+ years",             // Years of experience
+                        projects: "50+ projects",           // Number of projects using this skill
                         details: "Expert in semantic HTML5, accessibility standards (WCAG), SEO optimization, and modern web standards. Experienced with custom elements, web components, and progressive enhancement techniques."
                     },
                     {
@@ -3277,18 +4855,39 @@
             }
         }
 
-        // Projects Data Structure and Management
+        /* 
+        =============================================================================
+        PROJECTS MANAGER CLASS
+        =============================================================================
+        
+        Manages the projects section with dynamic project card generation,
+        interactive hover effects, and responsive layout adjustments.
+        
+        Features:
+        - Dynamic project card creation from data structure
+        - Interactive 3D hover effects with tilt animations
+        - Technology tag displays with smooth transitions
+        - Responsive grid layout that adapts to screen size
+        - Touch support for mobile devices
+        - Keyboard accessibility for project interactions
+        - Performance-optimized animations and effects
+        */
         class ProjectsManager {
+            /**
+             * Initialize the projects manager with comprehensive project data
+             * and set up the projects section with interactive cards
+             */
             constructor() {
+                // Comprehensive project portfolio data structure
                 this.projectsData = [
                     {
                         id: 1,
                         title: "E-Commerce Platform",
                         description: "Modern responsive e-commerce solution with cart functionality, user authentication, and smooth checkout process. Built with focus on user experience and performance.",
-                        technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
-                        icon: "🛒",
-                        link: "#",
-                        featured: true
+                        technologies: ["HTML5", "CSS3", "JavaScript", "Responsive Design"], // Tech stack used
+                        icon: "🛒",                         // Visual representation
+                        link: "#",                          // Project link (placeholder)
+                        featured: true                      // Whether to highlight this project
                     },
                     {
                         id: 2,
@@ -3531,27 +5130,52 @@
             }
         }
 
-        // Contact Form Manager Class
+        /* 
+        =============================================================================
+        CONTACT FORM MANAGER CLASS
+        =============================================================================
+        
+        Manages the contact form with comprehensive validation, user feedback,
+        and accessibility features for optimal user experience.
+        
+        Features:
+        - Real-time form validation with visual feedback
+        - Custom validation rules for each field type
+        - Animated input focus effects and error states
+        - Comprehensive error messaging with accessibility
+        - Loading states during form submission
+        - Success/failure feedback with animations
+        - Keyboard navigation and accessibility support
+        - Debounced validation to prevent excessive checking
+        */
         class ContactFormManager {
+            /**
+             * Initialize the contact form manager with all form elements
+             * and comprehensive validation system
+             */
             constructor() {
-                this.form = document.getElementById('contactForm');
-                this.nameInput = document.getElementById('name');
-                this.emailInput = document.getElementById('email');
-                this.messageInput = document.getElementById('message');
-                this.submitBtn = document.getElementById('submitBtn');
-                this.successMessage = document.getElementById('formSuccessMessage');
+                // Main form elements
+                this.form = document.getElementById('contactForm');               // Main form element
+                this.nameInput = document.getElementById('name');                 // Name input field
+                this.emailInput = document.getElementById('email');               // Email input field
+                this.messageInput = document.getElementById('message');           // Message textarea
+                this.submitBtn = document.getElementById('submitBtn');            // Submit button
+                this.successMessage = document.getElementById('formSuccessMessage'); // Success message
 
-                this.nameGroup = document.getElementById('nameGroup');
-                this.emailGroup = document.getElementById('emailGroup');
-                this.messageGroup = document.getElementById('messageGroup');
+                // Form group containers for styling and validation states
+                this.nameGroup = document.getElementById('nameGroup');            // Name field container
+                this.emailGroup = document.getElementById('emailGroup');          // Email field container
+                this.messageGroup = document.getElementById('messageGroup');      // Message field container
 
-                this.nameError = document.getElementById('nameError');
-                this.emailError = document.getElementById('emailError');
-                this.messageError = document.getElementById('messageError');
+                // Error message elements for validation feedback
+                this.nameError = document.getElementById('nameError');            // Name error display
+                this.emailError = document.getElementById('emailError');          // Email error display
+                this.messageError = document.getElementById('messageError');      // Message error display
 
-                this.nameSuccess = document.getElementById('nameSuccess');
-                this.emailSuccess = document.getElementById('emailSuccess');
-                this.messageSuccess = document.getElementById('messageSuccess');
+                // Success message elements for positive feedback
+                this.nameSuccess = document.getElementById('nameSuccess');        // Name success display
+                this.emailSuccess = document.getElementById('emailSuccess');      // Email success display
+                this.messageSuccess = document.getElementById('messageSuccess');  // Message success display
 
                 this.isSubmitting = false;
                 this.validationRules = {
@@ -4034,57 +5658,507 @@
             }
         }
 
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize navigation controller
-            const navigationController = new NavigationController();
-
-            // Initialize color management system
-            const colorManager = new ColorManager();
-
-            // Initialize scroll-triggered animation system
-            const animationController = new AnimationController();
-
-            // Initialize skills manager
-            const skillsManager = new SkillsManager();
-            skillsManager.setAnimationController(animationController);
-
-            // Initialize projects manager
-            const projectsManager = new ProjectsManager();
-            projectsManager.setAnimationController(animationController);
-
-            // Trigger a re-render to ensure animations work
-            setTimeout(() => {
-                skillsManager.renderSkills();
-                projectsManager.renderProjects();
-            }, 100);
-
-            // Initialize contact form manager
-            const contactFormManager = new ContactFormManager();
-
-            // Initialize back to top button
-            const backToTopManager = new BackToTopManager();
-
-            // Handle window resize for responsive components
-            window.addEventListener('resize', () => {
-                skillsManager.handleResize();
-                projectsManager.handleResize();
-            });
-
-            // Set initial active nav link
-            const homeLink = document.querySelector('a[href="#home"]');
-            if (homeLink) {
-                homeLink.classList.add('active');
+        // Professional Links Manager Class
+        class ProfessionalLinksManager {
+            constructor() {
+                this.initializeProfessionalLinks();
+                this.addLinkTracking();
             }
 
-            // Make controllers globally accessible for debugging/testing
-            window.colorManager = colorManager;
-            window.animationController = animationController;
-            window.skillsManager = skillsManager;
-            window.projectsManager = projectsManager;
-            window.contactFormManager = contactFormManager;
-            window.backToTopManager = backToTopManager;
+            initializeProfessionalLinks() {
+                // Get all professional links
+                this.professionalLinks = document.querySelectorAll('.professional-link, .hero-professional-link');
+
+                // Add enhanced accessibility and interaction handling
+                this.professionalLinks.forEach(link => {
+                    this.enhanceLinkAccessibility(link);
+                    this.addLinkInteractions(link);
+                });
+            }
+
+            enhanceLinkAccessibility(link) {
+                // Ensure external links have proper attributes
+                if (link.hasAttribute('target') && link.getAttribute('target') === '_blank') {
+                    // Add security attributes for external links
+                    if (!link.hasAttribute('rel')) {
+                        link.setAttribute('rel', 'noopener noreferrer');
+                    }
+
+                    // Add visual indicator for external links
+                    const isHeroLink = link.classList.contains('hero-professional-link');
+                    if (!isHeroLink) {
+                        const linkText = link.querySelector('.professional-link-text');
+                        if (linkText && !linkText.textContent.includes('↗')) {
+                            linkText.textContent += ' ↗';
+                        }
+                    }
+                }
+
+                // Add keyboard navigation support
+                link.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.handleLinkClick(link, e);
+                    }
+                });
+            }
+
+            addLinkInteractions(link) {
+                // Add click tracking and enhanced interactions
+                link.addEventListener('click', (e) => {
+                    this.handleLinkClick(link, e);
+                });
+
+                // Add hover effects for better UX
+                link.addEventListener('mouseenter', () => {
+                    this.handleLinkHover(link, true);
+                });
+
+                link.addEventListener('mouseleave', () => {
+                    this.handleLinkHover(link, false);
+                });
+
+                // Add focus/blur effects for keyboard users
+                link.addEventListener('focus', () => {
+                    this.handleLinkFocus(link, true);
+                });
+
+                link.addEventListener('blur', () => {
+                    this.handleLinkFocus(link, false);
+                });
+            }
+
+            handleLinkClick(link, event) {
+                const href = link.getAttribute('href');
+                const linkType = this.getLinkType(href);
+
+                // Track link clicks for analytics (placeholder)
+                this.trackLinkClick(linkType, href);
+
+                // Handle email links with enhanced UX
+                if (linkType === 'email') {
+                    this.handleEmailLink(link, href, event);
+                } else if (linkType === 'external') {
+                    this.handleExternalLink(link, href, event);
+                }
+
+                // Add visual feedback
+                this.addClickFeedback(link);
+            }
+
+            handleEmailLink(link, href, event) {
+                // Check if user's device can handle mailto links
+                if (this.canHandleMailto()) {
+                    // Let the default behavior handle the mailto link
+                    console.log('Opening email client for:', href);
+                } else {
+                    // Fallback: copy email to clipboard and show notification
+                    event.preventDefault();
+                    const email = href.replace('mailto:', '');
+                    this.copyToClipboard(email);
+                    this.showNotification(`Email address copied: ${email}`, 'success');
+                }
+            }
+
+            handleExternalLink(link, href, event) {
+                // Add loading state for external links
+                const originalText = link.textContent;
+                const linkText = link.querySelector('.professional-link-text');
+
+                if (linkText) {
+                    linkText.textContent = 'Opening...';
+                    setTimeout(() => {
+                        linkText.textContent = originalText;
+                    }, 2000);
+                }
+
+                console.log('Opening external link:', href);
+            }
+
+            handleLinkHover(link, isHovering) {
+                // Add subtle animation effects on hover
+                if (isHovering) {
+                    link.style.transform = link.classList.contains('hero-professional-link')
+                        ? 'translateY(-5px) scale(1.15)'
+                        : 'translateY(-5px) scale(1.05)';
+                } else {
+                    link.style.transform = '';
+                }
+            }
+
+            handleLinkFocus(link, isFocused) {
+                // Enhanced focus indicators for accessibility
+                if (isFocused) {
+                    link.style.outline = '3px solid rgba(0, 123, 255, 0.5)';
+                    link.style.outlineOffset = '3px';
+                } else {
+                    link.style.outline = '';
+                    link.style.outlineOffset = '';
+                }
+            }
+
+            getLinkType(href) {
+                if (href.startsWith('mailto:')) return 'email';
+                if (href.startsWith('tel:')) return 'phone';
+                if (href.startsWith('http') || href.startsWith('//')) return 'external';
+                return 'internal';
+            }
+
+            trackLinkClick(linkType, href) {
+                // Placeholder for analytics tracking
+                console.log(`Professional link clicked: ${linkType} - ${href}`);
+
+                // Example: Google Analytics tracking (if implemented)
+                // gtag('event', 'click', {
+                //     event_category: 'Professional Links',
+                //     event_label: linkType,
+                //     value: href
+                // });
+            }
+
+            addClickFeedback(link) {
+                // Add visual click feedback
+                link.style.transform = link.classList.contains('hero-professional-link')
+                    ? 'translateY(-2px) scale(1.1)'
+                    : 'translateY(-2px) scale(1.02)';
+
+                setTimeout(() => {
+                    link.style.transform = '';
+                }, 150);
+            }
+
+            canHandleMailto() {
+                // Simple check for mailto support
+                return navigator.userAgent.indexOf('Mobile') === -1 ||
+                    /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            }
+
+            copyToClipboard(text) {
+                // Modern clipboard API with fallback
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        console.log('Email copied to clipboard');
+                    }).catch(err => {
+                        console.error('Failed to copy email:', err);
+                        this.fallbackCopyToClipboard(text);
+                    });
+                } else {
+                    this.fallbackCopyToClipboard(text);
+                }
+            }
+
+            fallbackCopyToClipboard(text) {
+                // Fallback method for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+
+                try {
+                    document.execCommand('copy');
+                    console.log('Email copied to clipboard (fallback)');
+                } catch (err) {
+                    console.error('Fallback copy failed:', err);
+                }
+
+                document.body.removeChild(textArea);
+            }
+
+            showNotification(message, type = 'info') {
+                // Create and show a temporary notification
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                notification.textContent = message;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'success' ? '#28a745' : '#007bff'};
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                    z-index: 10000;
+                    font-weight: 500;
+                    transform: translateX(100%);
+                    transition: transform 0.3s ease;
+                `;
+
+                document.body.appendChild(notification);
+
+                // Animate in
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(0)';
+                }, 100);
+
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    notification.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+
+            // Public method to update professional links
+            updateLinks(newLinks) {
+                // Method to dynamically update professional links if needed
+                console.log('Updating professional links:', newLinks);
+            }
+
+            // Public method to get current links
+            getCurrentLinks() {
+                const links = {};
+                this.professionalLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    const type = this.getLinkType(href);
+                    links[type] = href;
+                });
+                return links;
+            }
+        }
+
+        /* 
+        =============================================================================
+        PAGE INITIALIZATION AND SETUP
+        =============================================================================
+        
+        This section handles the initialization of all website components when the
+        DOM is fully loaded. It creates instances of all manager classes and sets
+        up the interconnections between different systems.
+        
+        Initialization Order:
+        1. Navigation system for user interaction
+        2. Color management for theme customization
+        3. Animation controller for scroll effects
+        4. Content managers (skills, projects)
+        5. Form handling for user communication
+        6. Utility components (back-to-top, professional links)
+        7. Event listeners for responsive behavior
+        8. Global accessibility setup
+        */
+
+        // Wait for DOM to be fully loaded before initializing components
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                // Performance monitoring
+                const initStartTime = performance.now();
+
+                /* 
+                CORE SYSTEM INITIALIZATION
+                -------------------------
+                Initialize fundamental systems that other components depend on
+                */
+
+                // Initialize navigation system for smooth scrolling and mobile menu
+                const navigationController = new NavigationController();
+
+                // Initialize color management system for real-time theme customization
+                const colorManager = new ColorManager();
+
+                // Initialize animation controller for scroll-triggered effects
+                const animationController = new AnimationController();
+
+                // Error boundary for component initialization
+                const initializeComponent = (ComponentClass, name, ...args) => {
+                    try {
+                        return new ComponentClass(...args);
+                    } catch (error) {
+                        console.error(`Error initializing ${name}:`, error);
+                        return null;
+                    }
+                };
+
+                /* 
+                CONTENT MANAGER INITIALIZATION
+                -----------------------------
+                Initialize content sections with dynamic functionality
+                */
+
+                // Initialize skills section with progress animations
+                const skillsManager = initializeComponent(SkillsManager, 'SkillsManager');
+                if (skillsManager && animationController) {
+                    skillsManager.setAnimationController(animationController);
+                }
+
+                // Initialize projects section with interactive cards
+                const projectsManager = initializeComponent(ProjectsManager, 'ProjectsManager');
+                if (projectsManager && animationController) {
+                    projectsManager.setAnimationController(animationController);
+                }
+
+                // Trigger initial render to ensure proper animation setup
+                // Small delay ensures DOM is fully ready for manipulation
+                setTimeout(() => {
+                    try {
+                        if (skillsManager) skillsManager.renderSkills();
+                        if (projectsManager) projectsManager.renderProjects();
+                    } catch (error) {
+                        console.error('Error during initial render:', error);
+                    }
+                }, 100);
+
+                /* 
+                USER INTERACTION COMPONENTS
+                --------------------------
+                Initialize components that handle user input and feedback
+                */
+
+                // Initialize contact form with validation and submission handling
+                const contactFormManager = initializeComponent(ContactFormManager, 'ContactFormManager');
+
+                // Initialize back-to-top button with smooth scrolling
+                const backToTopManager = initializeComponent(BackToTopManager, 'BackToTopManager');
+
+                // Initialize professional links with enhanced interactions
+                const professionalLinksManager = initializeComponent(ProfessionalLinksManager, 'ProfessionalLinksManager');
+
+                /* 
+                RESPONSIVE BEHAVIOR SETUP
+                ------------------------
+                Handle window resize events for responsive components
+                */
+                window.addEventListener('resize', () => {
+                    skillsManager.handleResize();       // Adjust skills layout
+                    projectsManager.handleResize();     // Adjust projects layout
+                });
+
+                /* 
+                INITIAL STATE CONFIGURATION
+                --------------------------
+                Set up initial UI state and accessibility features
+                */
+
+                // Set home section as initially active in navigation
+                const homeLink = document.querySelector('a[href="#home"]');
+                if (homeLink) {
+                    homeLink.classList.add('active');
+                }
+
+                /* 
+                GLOBAL ACCESSIBILITY AND DEBUGGING
+                ---------------------------------
+                Make controllers globally accessible for debugging and testing
+                Also enables console-based interaction for development
+                */
+                window.colorManager = colorManager;
+                window.animationController = animationController;
+                window.skillsManager = skillsManager;
+                window.projectsManager = projectsManager;
+                window.contactFormManager = contactFormManager;
+                window.backToTopManager = backToTopManager;
+                window.professionalLinksManager = professionalLinksManager;
+
+                // Performance monitoring and logging
+                const initEndTime = performance.now();
+                const initDuration = initEndTime - initStartTime;
+
+                // Log successful initialization for debugging
+                console.log(`Portfolio website initialized successfully in ${initDuration.toFixed(2)}ms`);
+                console.log('Available global controllers:', {
+                    navigationController,
+                    colorManager,
+                    animationController,
+                    skillsManager,
+                    projectsManager,
+                    contactFormManager,
+                    backToTopManager,
+                    professionalLinksManager
+                });
+
+                // Performance metrics for optimization
+                if (initDuration > 100) {
+                    console.warn(`Initialization took ${initDuration.toFixed(2)}ms - consider optimization`);
+                }
+
+                // Accessibility announcement for screen readers
+                const announcement = document.createElement('div');
+                announcement.setAttribute('aria-live', 'polite');
+                announcement.setAttribute('aria-atomic', 'true');
+                announcement.className = 'sr-only';
+                announcement.textContent = 'Portfolio website loaded and ready for navigation';
+                document.body.appendChild(announcement);
+
+                // Remove announcement after screen readers have processed it
+                setTimeout(() => {
+                    if (announcement.parentNode) {
+                        announcement.parentNode.removeChild(announcement);
+                    }
+                }, 1000);
+
+            } catch (error) {
+                console.error('Critical error during portfolio initialization:', error);
+
+                // Fallback: ensure basic functionality works
+                try {
+                    // Basic navigation fallback
+                    document.querySelectorAll('a[href^="#"]').forEach(link => {
+                        link.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const target = document.querySelector(link.getAttribute('href'));
+                            if (target) {
+                                target.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        });
+                    });
+
+                    // Basic mobile menu fallback
+                    const navToggle = document.getElementById('navToggle');
+                    const navMenu = document.getElementById('navMenu');
+                    if (navToggle && navMenu) {
+                        navToggle.addEventListener('click', () => {
+                            navMenu.classList.toggle('active');
+                            navToggle.classList.toggle('active');
+                        });
+                    }
+
+                    console.log('Basic fallback functionality initialized');
+                } catch (fallbackError) {
+                    console.error('Critical error: Even fallback initialization failed:', fallbackError);
+                }
+            }
         });
+
+        /* 
+        =============================================================================
+        GLOBAL UTILITY FUNCTIONS
+        =============================================================================
+        
+        These functions provide common functionality that can be called from
+        anywhere in the application, including inline event handlers in HTML.
+        */
+
+        /**
+         * SMOOTH SCROLL TO SECTION
+         * -----------------------
+         * Smoothly scrolls to a specific section while accounting for the fixed navbar.
+         * Used by CTA buttons and other navigation elements throughout the site.
+         * 
+         * @param {string} sectionId - The ID of the target section (without #)
+         */
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                // Calculate scroll position accounting for fixed navbar
+                const navbar = document.querySelector('.navbar');
+                const navbarHeight = navbar ? navbar.offsetHeight : 0;
+                const sectionTop = section.offsetTop - navbarHeight;
+
+                // Perform smooth scroll with modern API
+                window.scrollTo({
+                    top: sectionTop,
+                    behavior: 'smooth'                  // Smooth scrolling animation
+                });
+            } else {
+                console.warn(`Section with ID '${sectionId}' not found`);
+            }
+        }
     </script>
 </body>
 
